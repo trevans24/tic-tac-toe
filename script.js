@@ -14,6 +14,9 @@ Game.prototype = {
       this.OMoves.push(box)
     }
   }, 
+  isDraw: function(){
+    return this.XMoves.length + this.OMoves.length === 9
+  },
   reset: function() {
     this.XMoves = [];
     this.OMoves = [];
@@ -68,8 +71,7 @@ function addXorO(event){
       console.log(theGame.XMoves);
       checkForWin(XMoves, "X");
     }
-  // if the counter is greater than or equal to 10, the game is a draw!
-  if (counter >= 10){
+  if (theGame.isDraw()){
     turnText.innerHTML = "Game Over!";
     var conf = confirm("It's a draw, do you want to play again?");
     if(conf){
