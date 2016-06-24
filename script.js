@@ -14,6 +14,37 @@ Game.prototype = {
       this.OMoves.push(box)
     }
   }, 
+  checkForWin: function(movesArray){
+    var result = false
+    console.log("movesArray ") 
+    console.log(movesArray);
+
+    function comboChecker(previousValue, checkValue){
+      console.log("comboChecker " + checkValue + " " +previousValue); 
+      console.log("found? " + movesArray.indexOf(checkValue))
+      if (movesArray.indexOf(checkValue) !== -1){
+        console.log("Found!")
+        return previousValue+1;
+      } else {
+        console.log()
+        return previousValue;
+      }
+    }
+
+    function checkWinning(combination){
+      console.log(combination);
+      var winCounter = combination.reduce(comboChecker,0);
+      console.log("winCounter " + winCounter);
+      if(winCounter === 3) {
+        result = true
+      } 
+    }
+
+    Game.winningCombinations.forEach(checkWinning);
+
+    console.log("end result " + result);
+    return result;
+  },
   isDraw: function(){
     return this.XMoves.length + this.OMoves.length === 9
   },
@@ -58,8 +89,7 @@ function addXorO(event){
       turnText.innerHTML = "It is X's turn";
       counter++;
       theGame.addMove("O", boxNum)
-      console.log(theGame.OMoves);
-      checkForWin(OMoves, "O");
+      checkForWin(theGame.OMoves, "O");
     }
     else {
       XMoves.push(boxNum);
@@ -68,8 +98,7 @@ function addXorO(event){
       turnText.innerHTML = "It is O's turn";
       counter++;
       theGame.addMove("X", boxNum);
-      console.log(theGame.XMoves);
-      checkForWin(XMoves, "X");
+      checkForWin(theGame.XMoves, "X");
     }
   if (theGame.isDraw()){
     turnText.innerHTML = "Game Over!";
@@ -87,23 +116,12 @@ function addResetListener(){
 }
 
 function checkForWin(movesArray, name){
-  // loop over the first array of winning combinations
-  for (i = 0; i < winningCombinations.length; i++) {
-    // reset the winCounter each time!
-    winCounter = 0;
-    // loop over each individual array
-    for (var j = 0; j < winningCombinations[i].length; j++) {
-      // if the number in winning combo array is === a number in moves array, add to winCounter
-      if(movesArray.indexOf(winningCombinations[i][j]) !== -1){
-        winCounter++;
-      }
-      // if winCounter === 3 that means all 3 moves are winning combos and game is over!
-      if(winCounter === 3){
-        alert("Game over, " + name + " wins!");
-        resetBoard();
-      }
-    }
-  }
+  console.log("Check for win " + JSON.stringify(movesArray));
+  console.log("The Game checkforWin " + theGame.checkForWin(movesArray));
+  if (theGame.checkForWin(movesArray)){
+    alert("Game over, " + name + " wins!");
+    resetBoard();
+  };
 }
 
 function resetBoard(){
