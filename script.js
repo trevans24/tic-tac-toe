@@ -1,40 +1,36 @@
 function Game() {
   this.OMoves = [];
   this.XMoves = [];
+  this.currentTurn = 'X'
 } 
 
 Game.winningCombinations = [[0,1,2],[3,4,5],[6,7,8],
 [0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 
 Game.prototype = {
-  addMove: function(player, box) {
-    if(player === 'X') {
-      this.XMoves.push(box)
+  addMove: function(box) {
+    console.log(this.currentTurn);
+    if(this.currentTurn === 'X') {
+      this.XMoves.push(box);
+      this.currentTurn = 'O'; 
     } else {
-      this.OMoves.push(box)
+      this.OMoves.push(box);
+      this.currentTurn = 'X';
     }
   }, 
   checkForWin: function(movesArray){
-    var result = false
-    console.log("movesArray ") 
-    console.log(movesArray);
+    var result = false;
 
     function comboChecker(previousValue, checkValue){
-      console.log("comboChecker " + checkValue + " " +previousValue); 
-      console.log("found? " + movesArray.indexOf(checkValue))
       if (movesArray.indexOf(checkValue) !== -1){
-        console.log("Found!")
         return previousValue+1;
       } else {
-        console.log()
         return previousValue;
       }
     }
 
     function checkWinning(combination){
-      console.log(combination);
       var winCounter = combination.reduce(comboChecker,0);
-      console.log("winCounter " + winCounter);
       if(winCounter === 3) {
         result = true
       } 
@@ -42,7 +38,6 @@ Game.prototype = {
 
     Game.winningCombinations.forEach(checkWinning);
 
-    console.log("end result " + result);
     return result;
   },
   isDraw: function(){
@@ -51,24 +46,42 @@ Game.prototype = {
   reset: function() {
     this.XMoves = [];
     this.OMoves = [];
+    this.currentTurn = 'X';
+  }
+}
+
+function CellView(number){
+  this.id = number;
+  var cellDiv = 'td[data-num="'+ number + '"]';
+  this.div = document.querySelector(cellDiv);
+  this.set = false;
+}
+
+CellView.prototype = {
+  addMark: function(letter){
+      if (this.set) {
+        return;
+      }
+      this.div.innerHTML = letter;
+      this.div.setAttribute("class", letter);
+      this.set = true;
+      theGame.addMove(this.id);
   }
 }
 
 window.onload = start;
 var boxes = document.getElementsByTagName("td");
 var turnText = document.querySelector(".playerTurn");
-var counter = 1;
 var winCounter = 0;
-var OMoves = [];
-var XMoves = [];
-
-var winningCombinations = [[0,1,2],[3,4,5],[6,7,8],
-[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 
 var theGame = new Game();
+var board = [];
 
 function start(){
   theGame.reset();
+  for(var i=0; i < 9; i++){
+    board.push(new CellView(i));
+  }
   addXandOListener();
   addResetListener();
 }
@@ -82,22 +95,15 @@ function addXandOListener(){
 function addXorO(event){
   if (event.target.innerHTML.length === 0){
     var boxNum = parseInt(event.target.getAttribute("data-num"))
-    if (counter % 2 === 0) {
-      OMoves.push(boxNum);
-      event.target.innerHTML = "O";
-      event.target.setAttribute("class","O");
+    console.log(theGame.currentTurn);
+    if (theGame.currentTurn === 'O'){
       turnText.innerHTML = "It is X's turn";
-      counter++;
-      theGame.addMove("O", boxNum)
+      board[boxNum].addMark('O');
       checkForWin(theGame.OMoves, "O");
     }
     else {
-      XMoves.push(boxNum);
-      event.target.innerHTML = "X";
-      event.target.setAttribute("class","X");
       turnText.innerHTML = "It is O's turn";
-      counter++;
-      theGame.addMove("X", boxNum);
+      board[boxNum].addMark('X');
       checkForWin(theGame.XMoves, "X");
     }
   if (theGame.isDraw()){
@@ -116,8 +122,6 @@ function addResetListener(){
 }
 
 function checkForWin(movesArray, name){
-  console.log("Check for win " + JSON.stringify(movesArray));
-  console.log("The Game checkforWin " + theGame.checkForWin(movesArray));
   if (theGame.checkForWin(movesArray)){
     alert("Game over, " + name + " wins!");
     resetBoard();
@@ -129,10 +133,7 @@ function resetBoard(){
     boxes[i].innerHTML="";
     boxes[i].setAttribute("class","clear");
   }
-  OMoves = [];
-  XMoves = [];
   winCounter=0;
-  counter = 1;
   turnText.innerHTML = "It is X's turn";
   theGame.reset();
-} 
+}
