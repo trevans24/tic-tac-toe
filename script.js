@@ -114,4 +114,5 @@ function resetBoard(){
   winCounter=0;
   counter = 1;
   turnText.innerHTML = "It is X's turn";
-}
+  theGame.reset();
+} 
