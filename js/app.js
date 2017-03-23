@@ -51,12 +51,13 @@ $('td').click(function(event){//what should be clicked
 			return true;
 		} else {
 			console.log("hello");
-			location.reload();
 			return false;
 		}
 	}
 
-
+	$('.reset').click(function(){
+		location.reload();
+	});
 }
 );
 
