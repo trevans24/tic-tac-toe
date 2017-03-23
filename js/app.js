@@ -21,7 +21,7 @@ $('td').click(function(event){//what should be clicked
 	//make current player change between x and o
 
 	if(currentPlayer === 1){
-		squareSelected.addClass("X"); //change class to current player
+		squareSelected.addClass("fa-firefox"); //change class to current player
 		squareSelected.append(playerOne);//change text in box to current players value
 		if(checkWin()){ //see if player wins
 			alert("Player " + currentPlayer + " Wins!"); //alert player if won
@@ -29,7 +29,7 @@ $('td').click(function(event){//what should be clicked
 		currentPlayer = 2; //move to playerTwo
 		}
 	} else {
-		squareSelected.addClass("O"); //change class to current player
+		squareSelected.addClass("fa-chrome"); //change class to current player
 		squareSelected.append(playerTwo);//change text in box to current players value
 		if(checkWin()){ //check if player wins
 			alert("Player " + currentPlayer + " Wins!"); //alert player if won
@@ -43,10 +43,10 @@ $('td').click(function(event){//what should be clicked
 
 	function checkWin() {
 		console.log("hello");
-		if($('.sq1').hasClass("X") && $('.sq2').hasClass("X") && $('.sq3').hasClass("X") || $('.sq4').hasClass("X") && $('.sq5').hasClass("X")  && $('.sq6').hasClass("X") || $('.sq7').hasClass("X") && $('.sq8').hasClass("X")  && $('.sq9').hasClass("X") || $('.sq1').hasClass("X") && $('.sq4').hasClass("X")  && $('.sq7').hasClass("X") || $('.sq2').hasClass("X") && $('.sq5').hasClass("X")  && $('.sq8').hasClass("X") || $('.sq3').hasClass("X") && $('.sq6').hasClass("X")  && $('.sq9').hasClass("X") || $('.sq1').hasClass("X") && $('.sq5').hasClass("X")  && $('.sq9').hasClass("X") || $('.sq3').hasClass("X") && $('.sq5').hasClass("X")  && $('.sq7').hasClass("X")){
+		if($('.sq1').hasClass("fa-firefox") && $('.sq2').hasClass("fa-firefox") && $('.sq3').hasClass("fa-firefox") || $('.sq4').hasClass("fa-firefox") && $('.sq5').hasClass("fa-firefox")  && $('.sq6').hasClass("fa-firefox") || $('.sq7').hasClass("fa-firefox") && $('.sq8').hasClass("fa-firefox")  && $('.sq9').hasClass("fa-firefox") || $('.sq1').hasClass("fa-firefox") && $('.sq4').hasClass("fa-firefox")  && $('.sq7').hasClass("fa-firefox") || $('.sq2').hasClass("fa-firefox") && $('.sq5').hasClass("fa-firefox")  && $('.sq8').hasClass("fa-firefox") || $('.sq3').hasClass("fa-firefox") && $('.sq6').hasClass("fa-firefox")  && $('.sq9').hasClass("fa-firefox") || $('.sq1').hasClass("fa-firefox") && $('.sq5').hasClass("fa-firefox")  && $('.sq9').hasClass("fa-firefox") || $('.sq3').hasClass("fa-firefox") && $('.sq5').hasClass("fa-firefox")  && $('.sq7').hasClass("fa-firefox")){
 			console.log("hello");
 			return true;
-		} else if ($('.sq1').hasClass("O") && $('.sq2').hasClass("O") && $('.sq3').hasClass("O") || $('.sq4').hasClass("O") && $('.sq5').hasClass("O")  && $('.sq6').hasClass("O") || $('.sq7').hasClass("O") && $('.sq8').hasClass("O")  && $('.sq9').hasClass("O") || $('.sq1').hasClass("O") && $('.sq4').hasClass("O")  && $('.sq7').hasClass("O") || $('.sq2').hasClass("O") && $('.sq5').hasClass("O")  && $('.sq8').hasClass("O") || $('.sq3').hasClass("O") && $('.sq6').hasClass("O")  && $('.sq9').hasClass("O") || $('.sq1').hasClass("O") && $('.sq5').hasClass("O")  && $('.sq9').hasClass("O") || $('.sq3').hasClass("O") && $('.sq5').hasClass("O")  && $('.sq7').hasClass("O")){
+		} else if ($('.sq1').hasClass("fa-chrome") && $('.sq2').hasClass("fa-chrome") && $('.sq3').hasClass("fa-chrome") || $('.sq4').hasClass("fa-chrome") && $('.sq5').hasClass("fa-chrome")  && $('.sq6').hasClass("fa-chrome") || $('.sq7').hasClass("fa-chrome") && $('.sq8').hasClass("fa-chrome")  && $('.sq9').hasClass("fa-chrome") || $('.sq1').hasClass("fa-chrome") && $('.sq4').hasClass("fa-chrome")  && $('.sq7').hasClass("fa-chrome") || $('.sq2').hasClass("fa-chrome") && $('.sq5').hasClass("fa-chrome")  && $('.sq8').hasClass("fa-chrome") || $('.sq3').hasClass("fa-chrome") && $('.sq6').hasClass("fa-chrome")  && $('.sq9').hasClass("fa-chrome") || $('.sq1').hasClass("fa-chrome") && $('.sq5').hasClass("fa-chrome")  && $('.sq9').hasClass("fa-chrome") || $('.sq3').hasClass("fa-chrome") && $('.sq5').hasClass("fa-chrome")  && $('.sq7').hasClass("fa-chrome")){
 			console.log("hello");
 			return true;
 		} else {
@@ -58,7 +58,7 @@ $('td').click(function(event){//what should be clicked
 	//reset button to clear board
 
 	$('.reset').click(function(){
-		location.reload();
+		location.reload(); // resets board without allowing score keeping
 	});
 }
 );
