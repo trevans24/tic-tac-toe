@@ -30,9 +30,9 @@ tbody {
 
 button {
 	margin: 0 auto;
-	border-radius: 20px;
+	border-radius: 5px;
 	background-color: #C2C2FF;
 	font-family: sans-serif;
-	height: 25px;
-	width: 25px;
+	height: 100px;
+	width: 125px;
 }
