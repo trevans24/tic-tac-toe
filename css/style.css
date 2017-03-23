@@ -11,8 +11,12 @@ table {
 }
 
 td {
-	border: 1px solid black;
-	padding: 80px;
+	border: 2px solid black;
+	padding: 60px;
+	cursor: pointer;
+	font-size: 70px;
+	font-family: "Permanent Marker", sans-serif;
+	font-weight: 800;
 }
 
 td:hover {
@@ -22,4 +26,13 @@ td:hover {
 tbody {
 	border-color: black
 
+}
+
+button {
+	margin: 0 auto;
+	border-radius: 20px;
+	background-color: #C2C2FF;
+	font-family: sans-serif;
+	height: 25px;
+	width: 25px;
 }
