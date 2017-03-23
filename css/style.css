@@ -1,0 +1,25 @@
+h1 {
+	text-align: center;
+}
+.game-board {
+	empty-cells: show;
+}
+
+table {
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+
+td {
+	border: 1px solid black;
+	padding: 80px;
+}
+
+td:hover {
+	background-color: #C2C2FF;
+}
+
+tbody {
+	border-color: black
+
+}
