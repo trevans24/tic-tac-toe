@@ -55,6 +55,8 @@ $('td').click(function(event){//what should be clicked
 		}
 	}
 
+	//reset button to clear board
+
 	$('.reset').click(function(){
 		location.reload();
 	});
