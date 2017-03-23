@@ -29,7 +29,8 @@ tbody {
 }
 
 button {
-	margin: 0 auto;
+	margin-left: 467px;
+	margin-top: 15px;
 	border-radius: 5px;
 	background-color: #C2C2FF;
 	font-family: sans-serif;
